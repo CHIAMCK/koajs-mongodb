@@ -5,6 +5,8 @@ const Router = require('koa-router')
 const nconf = require('nconf')
 const session = require('koa-session')
 var redisStore = require('koa-redis');
+const mongoose = require('mongoose');
+
 
 nconf
   .argv()
@@ -14,7 +16,13 @@ const app = new Koa();
 const router = new Router();
 
 // setup db connections
-require('./model')
+// require('./model')
+mongoose.connect('mongodb://testUser:xyz123@localhost:27017/my_db', {useNewUrlParser: true}, (err) => {
+  if (err) {
+    console.log(err)
+    console.log('Couldnot connect to MongoDB')
+  }
+})
 
 const routes = require('./routes')
 

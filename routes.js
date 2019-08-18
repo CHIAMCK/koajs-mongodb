@@ -1,6 +1,7 @@
 'use strict'
 
-module.exports = (router) => {
-    router.get('/')
+const user = require('./middleware/user')
 
+module.exports = (router) => {
+    router.post('/user', user.createUser)
 }
